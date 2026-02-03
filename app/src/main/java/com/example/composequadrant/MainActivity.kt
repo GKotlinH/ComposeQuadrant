@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeQuadrantTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ComposeQuadrantApp()
+                    ComposeQuadrantApp(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -39,9 +40,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ComposeQuadrantApp() {
-    Column(Modifier.fillMaxWidth()) {
-        Row(Modifier.weight(1f)) {
+fun ComposeQuadrantApp(modifier: Modifier = Modifier) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.weight(1f)) {
             ComposableInfoCard(
                 stringResource(R.string.first_title),
                 stringResource(R.string.first_description),
@@ -55,7 +56,7 @@ fun ComposeQuadrantApp() {
                 Modifier.weight(1f)
             )
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier = Modifier.weight(1f)) {
             ComposableInfoCard(
                 stringResource(R.string.third_title),
                 stringResource(R.string.third_description),
